@@ -1,0 +1,42 @@
+{
+    "target": "Churn Value",
+    "excluded_from_prediction": [
+        "CLTV"
+    ],
+    "engineered_features": [
+        "Num Addon Services",
+        "Automatic Payment",
+        "Month-to-Month"
+    ],
+    "numeric_features": [
+        "Tenure Months",
+        "Monthly Charges",
+        "Total Charges",
+        "Num Addon Services",
+        "Automatic Payment",
+        "Month-to-Month"
+    ],
+    "categorical_features": [
+        "Gender",
+        "Senior Citizen",
+        "Partner",
+        "Dependents",
+        "Phone Service",
+        "Multiple Lines",
+        "Internet Service",
+        "Online Security",
+        "Online Backup",
+        "Device Protection",
+        "Tech Support",
+        "Streaming TV",
+        "Streaming Movies",
+        "Contract",
+        "Paperless Billing",
+        "Payment Method"
+    ],
+    "random_state": 42,
+    "test_size": 0.2,
+    "training_rows": 5634,
+    "test_rows": 1409,
+    "processed_feature_count": 49
+}

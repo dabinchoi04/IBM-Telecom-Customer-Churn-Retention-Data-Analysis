@@ -1,0 +1,34 @@
+column,dtype,role,project_use
+CustomerID,object,Identifier,Business analysis only
+Count,int64,Technical helper,Exclude
+Country,object,Geography,Exclude from model — constant
+State,object,Geography,Exclude from model — constant
+City,object,Geography,Business/geographic analysis only
+Zip Code,int64,Geography,Business/geographic analysis only
+Lat Long,object,Geography,Exclude — redundant
+Latitude,float64,Geography,Business/geographic analysis only
+Longitude,float64,Geography,Business/geographic analysis only
+Gender,object,Demographic,Model candidate
+Senior Citizen,object,Demographic,Model candidate
+Partner,object,Demographic,Model candidate
+Dependents,object,Demographic,Model candidate
+Tenure Months,int64,Account,Model candidate
+Phone Service,object,Service,Model candidate
+Multiple Lines,object,Service,Model candidate
+Internet Service,object,Service,Model candidate
+Online Security,object,Service,Model candidate
+Online Backup,object,Service,Model candidate
+Device Protection,object,Service,Model candidate
+Tech Support,object,Service,Model candidate
+Streaming TV,object,Service,Model candidate
+Streaming Movies,object,Service,Model candidate
+Contract,object,Account,Model candidate
+Paperless Billing,object,Billing,Model candidate
+Payment Method,object,Billing,Model candidate
+Monthly Charges,float64,Billing,Model candidate
+Total Charges,float64,Billing,Model candidate
+Churn Label,object,Outcome,Exclude — target duplicate
+Churn Value,int64,Outcome,Prediction target
+Churn Score,int64,Outcome-derived,Exclude — leakage
+CLTV,int64,Customer value,Model candidate / retention prioritization
+Churn Reason,object,Post-churn outcome,Business analysis only — leakage

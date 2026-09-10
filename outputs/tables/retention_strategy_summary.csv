@@ -1,0 +1,8 @@
+metric,value
+Customers scored,"1,409"
+High-risk customers,203
+Critical-priority customers,47
+Critical + High-priority customers,182
+Total CLTV,"6,178,580"
+Expected CLTV at risk,"1,532,924"
+Expected CLTV at risk among Critical + High priority,"566,781"

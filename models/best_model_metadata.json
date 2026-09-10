@@ -1,0 +1,12 @@
+{
+    "selected_model": "Gradient Boosting",
+    "selection_metric": "ROC-AUC",
+    "roc_auc": 0.8523043736598723,
+    "pr_auc": 0.6696154790003849,
+    "accuracy": 0.7998580553584103,
+    "precision": 0.6503267973856209,
+    "recall": 0.5320855614973262,
+    "f1": 0.5852941176470589,
+    "default_threshold": 0.5,
+    "test_rows": 1409
+}
