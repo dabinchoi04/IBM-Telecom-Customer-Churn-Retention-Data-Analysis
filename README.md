@@ -1,6 +1,6 @@
 # IBM Telecom Customer Churn & Retention Analysis
 
-An end-to-end customer churn analytics project using **SQL, Python, and machine learning** to identify churn drivers, predict customer churn risk, and prioritize high-value customers for retention.
+An end-to-end customer churn analytics project using **SQL, Python, machine learning, and Power BI** to identify churn drivers, predict customer churn risk, prioritize high-value customers for retention, and communicate actionable insights through an interactive business dashboard.
 
 ## Business Problem
 
@@ -10,8 +10,11 @@ Customer churn directly affects recurring revenue and long-term customer value. 
 - What customer, service, contract, and billing characteristics are associated with churn?
 - Which customers should be prioritized for retention efforts?
 - How can churn risk be combined with customer value to support business decisions?
+- How can analytical and predictive results be communicated through an interactive business dashboard?
 
-The goal of this project is to build a data-driven retention framework that moves beyond simply predicting churn. The final output combines **predicted churn probability**, **Customer Lifetime Value (CLTV)**, and customer characteristics to identify high-priority customers and recommend targeted retention actions.
+The goal of this project is to build a data-driven retention framework that moves beyond simply predicting churn.
+
+The final solution combines **predicted churn probability**, **Customer Lifetime Value (CLTV)**, customer characteristics, and interactive Power BI reporting to identify high-priority customers and support targeted retention actions.
 
 ## Project Objectives
 
@@ -23,6 +26,7 @@ The goal of this project is to build a data-driven retention framework that move
 6. Generate customer-level churn probabilities.
 7. Combine churn risk with CLTV to create retention-priority tiers.
 8. Produce an actionable customer retention list.
+9. Develop an interactive Power BI dashboard for churn monitoring and retention prioritization.
 
 ## Dataset
 
@@ -59,6 +63,8 @@ Raw Customer Data
 06 — Retention Strategy
         ↓
 Customer Retention Action List
+        ↓
+Power BI Business Dashboard
 ```
 
 ## 1. Data Preparation
@@ -92,7 +98,21 @@ Exact geographic identifiers and other non-predictive fields were also excluded 
 Notebook: [`notebooks/02_sql_business_analysis.ipynb`](notebooks/02_sql_business_analysis.ipynb)  
 SQL file: [`sql/02_sql_business_analysis.sql`](sql/02_sql_business_analysis.sql)
 
-SQL was used to investigate the main business questions, including overall churn KPIs, churn by contract type, tenure, internet service, payment method, billing behavior, demographics, service features, CLTV quartiles, historical churn reasons, and the highest-value customers lost to churn.
+SQL was used to investigate the main business questions, including:
+
+- overall customer and churn KPIs;
+- churn by contract type;
+- churn by tenure;
+- churn by internet service;
+- churn by payment method;
+- billing behavior;
+- demographic differences;
+- service and support features;
+- CLTV segments;
+- historical churn reasons;
+- highest-value customers lost to churn.
+
+The SQL analysis establishes the descriptive business context before predictive modeling.
 
 ## 3. Exploratory Data Analysis
 
@@ -110,11 +130,19 @@ Python was used for deeper exploratory analysis and visualization.
 | Electronic check churn rate | **45.3%** |
 | Fiber optic churn rate | **41.9%** |
 
-The analysis suggests that churn is particularly concentrated among customers with short tenure, month-to-month contracts, electronic-check payments, fiber-optic service, and customers without certain support/security services.
+The analysis suggests that churn is particularly concentrated among customers with:
+
+- short tenure;
+- month-to-month contracts;
+- electronic-check payments;
+- fiber-optic internet service;
+- no or limited support/security services.
 
 These relationships are descriptive associations and should not be interpreted as causal effects.
 
-Selected figures are available in [`outputs/figures/`](outputs/figures/).
+Selected figures are available in:
+
+[`outputs/figures/`](outputs/figures/)
 
 ## 4. Feature Engineering
 
@@ -135,7 +163,9 @@ Three interpretable features were engineered:
 - Test observations: **1,409**
 - Churn rate in both sets: **26.54%**
 
-Numeric features were processed using median imputation and standardization. Categorical features were processed using most-frequent imputation and one-hot encoding.
+Numeric features were processed using median imputation and standardization.
+
+Categorical features were processed using most-frequent imputation and one-hot encoding.
 
 After preprocessing, the feature space contained **49 model-ready features**.
 
@@ -176,7 +206,9 @@ Because churn is an imbalanced classification problem, model performance was eva
 - ROC-AUC: **0.8523**
 - PR-AUC: **0.6696**
 
-The final business workflow uses the model's **predicted churn probability** rather than relying only on binary churn predictions, allowing customers to be ranked by relative churn risk.
+The final business workflow uses the model's **predicted churn probability** rather than relying only on binary churn predictions.
+
+This allows customers to be ranked by relative churn risk and supports more flexible retention prioritization.
 
 ## 6. Retention Strategy
 
@@ -198,7 +230,13 @@ to create actionable retention priorities.
 
 ### Customer Value Segments
 
-Customers are divided into Low Value, Medium Value, and High Value groups using CLTV terciles.
+Customers are divided into:
+
+- Low Value
+- Medium Value
+- High Value
+
+using CLTV terciles.
 
 ### Retention Priority Framework
 
@@ -234,29 +272,154 @@ On the held-out test set:
 | Expected CLTV at risk | **1,532,924** |
 | Expected CLTV at risk among Critical + High customers | **566,781** |
 
-The final action list also assigns rule-based customer risk factors and suggested retention actions such as longer-term contract incentives, automatic payment enrollment, discounted or trial tech support, online security bundles, loyalty pricing reviews, and new-customer onboarding outreach.
+The final action list also assigns customer-level risk factors and suggested retention actions such as:
+
+- longer-term contract incentives;
+- automatic payment enrollment;
+- discounted or trial technical support;
+- online security bundles;
+- loyalty pricing reviews;
+- new-customer onboarding outreach.
 
 The full customer retention action list is available in:
 
 [`outputs/tables/customer_retention_action_list.csv`](outputs/tables/customer_retention_action_list.csv)
 
+## 7. Power BI Dashboard
+
+An interactive **two-page Power BI dashboard** was developed to translate the analytical and predictive results into business-facing insights.
+
+The dashboard connects descriptive churn analysis with the customer-level retention framework and allows users to interactively explore customer segments, churn risk, customer value, and retention priorities.
+
+### Page 1 — Customer Churn Overview
+
+The first page focuses on understanding the overall churn problem and identifying the customer segments associated with higher churn.
+
+Key components include:
+
+- **Total Customers**
+- **Churned Customers**
+- **Churn Rate**
+- **Average CLTV**
+- interactive churn-driver exploration;
+- filtering by contract type, tenure group, and internet service;
+- top reported churn reasons.
+
+The **Churn Driver Explorer** uses an interactive decomposition tree to investigate churn rates across customer characteristics such as contract type and tenure.
+
+The **Top Churn Reasons** visualization summarizes the most commonly reported reasons among customers who actually churned.
+
+> `Churn Reason` is used only for descriptive analysis because it is only known after cancellation and was excluded from predictive modeling to prevent data leakage.
+
+![Customer Churn Overview](dashboard/churn_overview.png)
+
+### Page 2 — Retention Priority
+
+The second page converts predictive modeling results into a retention decision-support tool.
+
+Key KPIs include:
+
+- **1,409 customers scored**
+- **203 high-risk customers**
+- **182 Critical + High-priority customers**
+- approximately **$1.53M Expected CLTV at Risk**
+
+The page contains three main interactive visualizations.
+
+#### Risk × Customer Value Matrix
+
+Customers are segmented simultaneously by:
+
+```text
+Predicted Churn Risk × Customer Value
+```
+
+The heatmap shows how the scored customer population is distributed across Low, Medium, and High risk and value groups.
+
+This provides a visual representation of the retention-priority framework.
+
+#### Expected CLTV at Risk by Priority
+
+Expected CLTV at Risk is aggregated across:
+
+- Critical
+- High
+- Medium
+- Low
+
+retention tiers.
+
+This helps quantify where customer value exposure is concentrated.
+
+#### Customer Risk vs Customer Value
+
+A customer-level bubble chart plots:
+
+- **X-axis:** predicted churn probability
+- **Y-axis:** Customer Lifetime Value
+- **Bubble size:** Expected CLTV at Risk
+- **Color:** Retention Priority
+
+This makes it possible to visually identify customers who combine:
+
+- high churn probability;
+- high customer value;
+- high expected value at risk.
+
+Interactive tooltips provide additional customer-level context, including risk segment, value segment, key risk factors, and recommended retention actions.
+
+![Retention Priority Dashboard](dashboard/retention_priority.png)
+
+### Dashboard Purpose
+
+The Power BI report moves the project from static analysis to interactive decision support.
+
+The two-page structure answers two complementary business questions:
+
+```text
+Page 1:
+Where is churn concentrated and what customer characteristics are associated with it?
+
+Page 2:
+Which customers should retention teams prioritize and how much customer value is at risk?
+```
+
 ## Tools & Technologies
 
-- **Python**
-  - pandas
-  - NumPy
-  - Matplotlib
-  - scikit-learn
-- **SQL**
-  - SQLite
-- **Jupyter Notebook**
-- **GitHub**
+### Python
+
+- pandas
+- NumPy
+- Matplotlib
+- scikit-learn
+
+### SQL
+
+- SQLite
+
+### Business Intelligence
+
+- Power BI
+- DAX
+- Power Query
+
+### Development & Documentation
+
+- Jupyter Notebook
+- GitHub
 
 ## Key Business Takeaway
 
 A churn model is most useful when it supports a business decision rather than only producing a classification.
 
-This project demonstrates an end-to-end framework that identifies churn patterns, predicts customer-level churn risk, separates customer value from churn likelihood, combines both dimensions to prioritize retention efforts, and generates an actionable retention list for business teams.
+This project demonstrates an end-to-end framework that:
+
+1. identifies historical churn patterns;
+2. predicts customer-level churn risk;
+3. separates customer value from churn likelihood;
+4. combines risk and value to prioritize retention efforts;
+5. generates customer-level retention recommendations;
+6. communicates the results through an interactive Power BI dashboard.
 
 The resulting framework allows a telecom company to focus retention resources on customers who are both **likely to leave** and **valuable to retain**.
 
@@ -270,9 +433,8 @@ Potential extensions include:
 - estimating the financial impact of specific retention offers;
 - validating retention recommendations through A/B testing;
 - incorporating longitudinal customer usage data;
-- building an interactive Tableau or Power BI dashboard.
-
-Dashboard development is planned as a future extension.
+- integrating live or regularly refreshed customer data into the Power BI dashboard;
+- tracking retention campaign outcomes over time.
 
 ## Author
 
